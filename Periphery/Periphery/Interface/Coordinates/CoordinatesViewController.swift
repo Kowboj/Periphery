@@ -19,11 +19,10 @@ final class CoordinatesViewController: UIViewController {
                 if coordinatesView.latSegmented.selectedSegmentIndex == 1 { // S
                     lat *= -1
                 }
-                if coordinatesView.latSegmented.selectedSegmentIndex == 0 { // W
+                if coordinatesView.lonSegmented.selectedSegmentIndex == 0 { // W
                     lon *= -1
                 }
                 coordinates.append(CLLocationCoordinate2D(latitude: lat, longitude: -lon))
-                coordinatesView.editButton.isHidden = false
                 coordinatesView.tableView.reloadData()
             }
         }
@@ -85,9 +84,6 @@ final class CoordinatesViewController: UIViewController {
         
         // Add add coordinates action
         coordinatesView.addButton.addTarget(self, action: #selector(addClick), for: UIControl.Event.touchUpInside)
-        
-        // Add edit table action
-        coordinatesView.editButton.addTarget(self, action: #selector(editClick), for: UIControl.Event.touchUpInside)
         
         // Add show map action
         coordinatesView.showMapButton.addTarget(self, action: #selector(showMapClick), for: UIControl.Event.touchUpInside)

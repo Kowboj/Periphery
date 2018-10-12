@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F4F6CBA621707D5B008A0A14 /* PolygonTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F6CBA521707D5B008A0A14 /* PolygonTest.swift */; };
 		F4FC5F9A216F58C200BD710D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FC5F99216F58C200BD710D /* AppDelegate.swift */; };
 		F4FC5FA1216F58C400BD710D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4FC5FA0216F58C400BD710D /* Assets.xcassets */; };
 		F4FC5FA4216F58C400BD710D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4FC5FA2216F58C400BD710D /* LaunchScreen.storyboard */; };
@@ -20,7 +21,20 @@
 		F4FC5FC1216F9B6800BD710D /* PolygonCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FC5FC0216F9B6800BD710D /* PolygonCreator.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		F4F6CBA821707D5B008A0A14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F4FC5F8E216F58C200BD710D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F4FC5F95216F58C200BD710D;
+			remoteInfo = Periphery;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		F4F6CBA321707D5B008A0A14 /* PeripheryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeripheryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4F6CBA521707D5B008A0A14 /* PolygonTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonTest.swift; sourceTree = "<group>"; };
+		F4F6CBA721707D5B008A0A14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4FC5F96216F58C200BD710D /* Periphery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Periphery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4FC5F99216F58C200BD710D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4FC5FA0216F58C400BD710D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -37,6 +51,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F4F6CBA021707D5B008A0A14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F4FC5F93216F58C200BD710D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -47,10 +68,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F4F6CBA421707D5B008A0A14 /* PeripheryTests */ = {
+			isa = PBXGroup;
+			children = (
+				F4F6CBA521707D5B008A0A14 /* PolygonTest.swift */,
+				F4F6CBA721707D5B008A0A14 /* Info.plist */,
+			);
+			path = PeripheryTests;
+			sourceTree = "<group>";
+		};
 		F4FC5F8D216F58C200BD710D = {
 			isa = PBXGroup;
 			children = (
 				F4FC5F98216F58C200BD710D /* Periphery */,
+				F4F6CBA421707D5B008A0A14 /* PeripheryTests */,
 				F4FC5F97216F58C200BD710D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -59,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				F4FC5F96216F58C200BD710D /* Periphery.app */,
+				F4F6CBA321707D5B008A0A14 /* PeripheryTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -125,6 +157,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		F4F6CBA221707D5B008A0A14 /* PeripheryTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F4F6CBAC21707D5B008A0A14 /* Build configuration list for PBXNativeTarget "PeripheryTests" */;
+			buildPhases = (
+				F4F6CB9F21707D5B008A0A14 /* Sources */,
+				F4F6CBA021707D5B008A0A14 /* Frameworks */,
+				F4F6CBA121707D5B008A0A14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F4F6CBA921707D5B008A0A14 /* PBXTargetDependency */,
+			);
+			name = PeripheryTests;
+			productName = PeripheryTests;
+			productReference = F4F6CBA321707D5B008A0A14 /* PeripheryTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		F4FC5F95216F58C200BD710D /* Periphery */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F4FC5FA8216F58C400BD710D /* Build configuration list for PBXNativeTarget "Periphery" */;
@@ -152,6 +202,10 @@
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = Kowboj;
 				TargetAttributes = {
+					F4F6CBA221707D5B008A0A14 = {
+						CreatedOnToolsVersion = 10.0;
+						TestTargetID = F4FC5F95216F58C200BD710D;
+					};
 					F4FC5F95216F58C200BD710D = {
 						CreatedOnToolsVersion = 10.0;
 					};
@@ -171,11 +225,19 @@
 			projectRoot = "";
 			targets = (
 				F4FC5F95216F58C200BD710D /* Periphery */,
+				F4F6CBA221707D5B008A0A14 /* PeripheryTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		F4F6CBA121707D5B008A0A14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F4FC5F94216F58C200BD710D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -188,6 +250,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		F4F6CB9F21707D5B008A0A14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4F6CBA621707D5B008A0A14 /* PolygonTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F4FC5F92216F58C200BD710D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -206,6 +276,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		F4F6CBA921707D5B008A0A14 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F4FC5F95216F58C200BD710D /* Periphery */;
+			targetProxy = F4F6CBA821707D5B008A0A14 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		F4FC5FA2216F58C400BD710D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -218,6 +296,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		F4F6CBAA21707D5B008A0A14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B746NKQ5P6;
+				INFOPLIST_FILE = PeripheryTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kowboj.PeripheryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Periphery.app/Periphery";
+			};
+			name = Debug;
+		};
+		F4F6CBAB21707D5B008A0A14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B746NKQ5P6;
+				INFOPLIST_FILE = PeripheryTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kowboj.PeripheryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Periphery.app/Periphery";
+			};
+			name = Release;
+		};
 		F4FC5FA6216F58C400BD710D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -373,6 +491,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F4F6CBAC21707D5B008A0A14 /* Build configuration list for PBXNativeTarget "PeripheryTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4F6CBAA21707D5B008A0A14 /* Debug */,
+				F4F6CBAB21707D5B008A0A14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F4FC5F91216F58C200BD710D /* Build configuration list for PBXProject "Periphery" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

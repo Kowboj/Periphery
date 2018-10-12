@@ -63,19 +63,6 @@ final class CoordinatesView: UIView {
         return button
     }()
     
-    private(set) lazy var editButton: UIButton = {
-        let button = UIButton()
-        button.isHidden = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Edit", for: UIControl.State.normal)
-        button.titleLabel?.font = UIFont(name: "AmericanTypewriter", size: 12)
-        button.setTitleColor(.white, for: UIControl.State.normal)
-        button.layer.borderColor = UIColor.white.cgColor
-        button.layer.borderWidth = 1
-        button.layer.cornerRadius = 5
-        return button
-    }()
-    
     private(set) lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -110,7 +97,7 @@ final class CoordinatesView: UIView {
     }
     
     fileprivate func setupViewHierarchy() {
-        [latTextField, lonTextField, latSegmented, lonSegmented, infoLabel, addButton, editButton, tableView, showMapButton].forEach(addSubview)
+        [latTextField, lonTextField, latSegmented, lonSegmented, infoLabel, addButton, tableView, showMapButton].forEach(addSubview)
     }
     
     fileprivate func setupProperties() {
@@ -148,11 +135,6 @@ final class CoordinatesView: UIView {
             addButton.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 20),
             addButton.heightAnchor.constraint(equalToConstant: 30),
             addButton.widthAnchor.constraint(equalToConstant: 120),
-            
-            editButton.leadingAnchor.constraint(equalTo: tableView.leadingAnchor),
-            editButton.topAnchor.constraint(equalTo: addButton.topAnchor),
-            editButton.heightAnchor.constraint(equalToConstant: 30),
-            editButton.widthAnchor.constraint(equalToConstant: 40),
             
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50),
