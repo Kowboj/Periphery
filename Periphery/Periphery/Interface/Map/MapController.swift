@@ -57,7 +57,7 @@ class MapController: NSObject {
         
         // Add markers
         for coordinate in coordinates.enumerated() {
-            addMarker(title: "Marker number \(coordinate.offset)", coordinate: coordinate.element)
+            addMarker(title: "\(coordinate.offset+1)", coordinate: coordinate.element)
         }
         
         // Add polygon

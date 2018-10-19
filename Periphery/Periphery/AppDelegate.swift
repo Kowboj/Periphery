@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  Periphery
-//
-//  Created by NoGravity DEV on 11.10.2018.
-//  Copyright © 2018 Kowboj. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain

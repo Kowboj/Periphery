@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F43FF5292179D59200D46EC4 /* MapKit.CLLocationCoordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43FF5282179D59200D46EC4 /* MapKit.CLLocationCoordinate2D.swift */; };
 		F4F6CBA621707D5B008A0A14 /* PolygonTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F6CBA521707D5B008A0A14 /* PolygonTest.swift */; };
 		F4FC5F9A216F58C200BD710D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FC5F99216F58C200BD710D /* AppDelegate.swift */; };
 		F4FC5FA1216F58C400BD710D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4FC5FA0216F58C400BD710D /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F43FF5282179D59200D46EC4 /* MapKit.CLLocationCoordinate2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKit.CLLocationCoordinate2D.swift; sourceTree = "<group>"; };
 		F4F6CBA321707D5B008A0A14 /* PeripheryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeripheryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F6CBA521707D5B008A0A14 /* PolygonTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonTest.swift; sourceTree = "<group>"; };
 		F4F6CBA721707D5B008A0A14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -68,6 +70,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F43FF5252179D51500D46EC4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F43FF5282179D59200D46EC4 /* MapKit.CLLocationCoordinate2D.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		F4F6CBA421707D5B008A0A14 /* PeripheryTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,8 +110,9 @@
 			children = (
 				F4FC5F99216F58C200BD710D /* AppDelegate.swift */,
 				F4FC5FAB216F598D00BD710D /* Interface */,
-				F4FC5FAC216F599A00BD710D /* Resources */,
 				F4FC5FB6216F6E8E00BD710D /* Protocols */,
+				F43FF5252179D51500D46EC4 /* Extensions */,
+				F4FC5FAC216F599A00BD710D /* Resources */,
 				F4FC5FA2216F58C400BD710D /* LaunchScreen.storyboard */,
 			);
 			path = Periphery;
@@ -270,6 +281,7 @@
 				F4FC5FB3216F677E00BD710D /* CoordinatesViewController.swift in Sources */,
 				F4FC5F9A216F58C200BD710D /* AppDelegate.swift in Sources */,
 				F4FC5FB5216F6E5300BD710D /* CoordinatesCell.swift in Sources */,
+				F43FF5292179D59200D46EC4 /* MapKit.CLLocationCoordinate2D.swift in Sources */,
 				F4FC5FB8216F6E9D00BD710D /* Reusable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

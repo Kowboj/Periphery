@@ -13,7 +13,7 @@ final class CoordinatesViewController: UIViewController {
             coordinatesView.infoLabel.text = nil
             var lat = NSString(string: latTextField).doubleValue
             var lon = NSString(string: lonTextField).doubleValue
-            if lat > 90 || lon > 180 {
+            if abs(lat) > 90 || abs(lon) > 180 {
                 coordinatesView.infoLabel.text = "Please use real values"
             } else {
                 if coordinatesView.latSegmented.selectedSegmentIndex == 1 { // S
@@ -22,14 +22,10 @@ final class CoordinatesViewController: UIViewController {
                 if coordinatesView.lonSegmented.selectedSegmentIndex == 0 { // W
                     lon *= -1
                 }
-                coordinates.append(CLLocationCoordinate2D(latitude: lat, longitude: -lon))
+                coordinates.append(CLLocationCoordinate2D(latitude: lat, longitude: lon))
                 coordinatesView.tableView.reloadData()
             }
         }
-    }
-    
-    @objc func editClick() {
-        coordinatesView.tableView.isEditing.toggle()
     }
     
     @objc func showMapClick() {

@@ -1,149 +1,191 @@
-//
-//  PolygonCreator.swift
-//  Periphery
-//
-//  Created by NoGravity DEV on 11.10.2018.
-//  Copyright © 2018 Kowboj. All rights reserved.
-//
-
 import UIKit
 import MapKit
 
+enum Direction {
+    case NE
+    case SE
+    case SW
+    case NW
+}
+
 class PolygonCreator {
+    
+    // It's the final array containing coordinates in the proper order
+    var polygonCoordinates = [CLLocationCoordinate2D]()
+    var lowestTangens: Double = Double.infinity // as maximum tangens is infinity
     
     func createPolygon(coordinates: [CLLocationCoordinate2D]) -> MKPolygon? {
         
-        // It's the final array containing coordinates in the proper order
-        var polygonCoordinates = [CLLocationCoordinate2D]()
         if coordinates.count <= 2 {
-            
             print("Need at least 3 coordinates")
             return nil
             
         } else if coordinates.count > 2 {
             
-            var westPoint = CLLocationCoordinate2DMake(CLLocationDegrees(0), CLLocationDegrees(180))
-            var eastPoint = CLLocationCoordinate2DMake(CLLocationDegrees(0), CLLocationDegrees(-180))
-            
-            // Get westmost and eastmost points
-            for coordinate in coordinates {
-                if coordinate.longitude < westPoint.longitude {
-                    westPoint = coordinate
-                }
-                if coordinate.longitude > eastPoint.longitude {
-                    eastPoint = coordinate
-                }
-            }
+            let edgePoints = findWestAndEastMostPoint(coordinates: coordinates)
+            let westPoint = edgePoints.westPoint
+            let eastPoint = edgePoints.eastPoint
             
             // Begin with the westmost point
             polygonCoordinates.append(westPoint)
-            
-            // What is it all about? Search for point with lowest tangens - (x/y -> min)
-            var pointWithLowestTangens = CLLocationCoordinate2D()
             var lastAddedPoint = westPoint
-            var lowestTangens: Double = 99999 // as maximum tangens is infinity
+            
+            // What is it all about? Search for a point with the lowest tangens
+            var pointWithLowestTangens = CLLocationCoordinate2D(latitude: -90, longitude: 180)
+            
+            // If no coords in NE direction, try SE, SW, and finally NW
             var numberOfAttempts = 0
             var noMoreAttempts = false
             
-            // Go east until we reach the eastmost point
-            while pointWithLowestTangens.longitude != eastPoint.longitude && pointWithLowestTangens.latitude != eastPoint.latitude {
-                if !noMoreAttempts { // if there is a point above lastAddedPoint
-                    numberOfAttempts = 0
+            // Until it bumps into the eastmost point
+            while pointWithLowestTangens != eastPoint {
+                if !noMoreAttempts {
                     for coord in coordinates {
-                        
-                        // Look for points in the north
-                        if coord.latitude > lastAddedPoint.latitude {
-                            if (coord.longitude - lastAddedPoint.longitude)/(coord.latitude - lastAddedPoint.latitude) < lowestTangens {
-                                lowestTangens = (coord.longitude - lastAddedPoint.longitude)/(coord.latitude - lastAddedPoint.latitude)
-                                pointWithLowestTangens = coord
-                            }
+                        // NE
+                        if checkDirection(from: lastAddedPoint, to: coord, direction: .NE), let newLowestTangens = returnTangensIfLowest(from: lastAddedPoint, coord: coord, direction: .NE) {
+                            lowestTangens = newLowestTangens
+                            pointWithLowestTangens = coord
                         } else {
                             numberOfAttempts += 1
-                            if numberOfAttempts == coordinates.count-1 {
+                            if numberOfAttempts == coordinates.count {
                                 noMoreAttempts = true
                             }
                         }
                     }
-                    if pointWithLowestTangens.latitude != 0 {
+                    if !polygonCoordinates.contains(pointWithLowestTangens) && pointWithLowestTangens != CLLocationCoordinate2D(latitude: -90, longitude: 180) {
                         polygonCoordinates.append(pointWithLowestTangens)
                         lastAddedPoint = pointWithLowestTangens
                     }
-                    lowestTangens = 1000
-                } else { // if there is no points above lastAddedPoint
+                    numberOfAttempts = 0
+                    lowestTangens = Double.infinity
+                } else {
                     for coord in coordinates {
-                        
-                        // Look for points in the south
-                        if coord.latitude < lastAddedPoint.latitude && coord.longitude > lastAddedPoint.longitude {
-                            if (lastAddedPoint.latitude - coord.latitude)/(coord.longitude - lastAddedPoint.longitude) < lowestTangens {
-                                lowestTangens = (lastAddedPoint.latitude - coord.latitude)/(coord.longitude - lastAddedPoint.longitude)
-                                pointWithLowestTangens = coord
-                            }
+                        // SE
+                        if checkDirection(from: lastAddedPoint, to: coord, direction: .SE), let newLowestTangens = returnTangensIfLowest(from: lastAddedPoint, coord: coord, direction: .SE) {
+                            lowestTangens = newLowestTangens
+                            pointWithLowestTangens = coord
                         }
                     }
-                    
-                    polygonCoordinates.append(pointWithLowestTangens)
-                    lastAddedPoint = pointWithLowestTangens
-                    lowestTangens = 99999
-                    
+                    if !polygonCoordinates.contains(pointWithLowestTangens) {
+                        polygonCoordinates.append(pointWithLowestTangens)
+                        lastAddedPoint = pointWithLowestTangens
+                    }
+                    lowestTangens = Double.infinity
                 }
             }
-            
-            lowestTangens = 99999
             noMoreAttempts = false
             
-            // Go west until we reach the westmost point (first point)
-            while pointWithLowestTangens.longitude != westPoint.longitude && pointWithLowestTangens.latitude != westPoint.latitude {
-                if noMoreAttempts == false {
-                    numberOfAttempts = 0
+            // Until it closes the polygon bumping into the first, westmost point
+            while pointWithLowestTangens != westPoint {
+                if !noMoreAttempts {
                     for coord in coordinates {
-                        
-                        // If it's going south
-                        if coord.latitude < lastAddedPoint.latitude {
-                            if (lastAddedPoint.longitude - coord.longitude)/(lastAddedPoint.latitude - coord.latitude) < lowestTangens {
-                                lowestTangens = (coord.longitude - lastAddedPoint.longitude)/(coord.latitude - lastAddedPoint.latitude)
-                                pointWithLowestTangens = coord
-                            }
+                        // SW
+                        if checkDirection(from: lastAddedPoint, to: coord, direction: .SW), let newLowestTangens = returnTangensIfLowest(from: lastAddedPoint, coord: coord, direction: .SW) {
+                            lowestTangens = newLowestTangens
+                            pointWithLowestTangens = coord
                         } else {
-                            numberOfAttempts += 1 //number of North coords
-                            if numberOfAttempts == coordinates.count-1 {
+                            numberOfAttempts += 1
+                            if numberOfAttempts == coordinates.count {
                                 noMoreAttempts = true
                             }
                         }
                     }
                     if pointWithLowestTangens.latitude != 0 {
-                        polygonCoordinates.append(pointWithLowestTangens)
-                        lastAddedPoint = pointWithLowestTangens
+                        if !polygonCoordinates.contains(pointWithLowestTangens) {
+                            polygonCoordinates.append(pointWithLowestTangens)
+                            lastAddedPoint = pointWithLowestTangens
+                        }
                     }
-                    lowestTangens = 99999
-                } else {
                     numberOfAttempts = 0
+                    lowestTangens = Double.infinity
+                } else {
                     for coord in coordinates {
-                        
-                        // If it's going north
-                        if coord.latitude > lastAddedPoint.latitude && coord.longitude < lastAddedPoint.longitude {
-                            if (coord.latitude - lastAddedPoint.latitude)/(lastAddedPoint.longitude - coord.longitude) < lowestTangens {
-                                lowestTangens = (coord.latitude - lastAddedPoint.latitude)/(lastAddedPoint.longitude - coord.longitude)
-                                pointWithLowestTangens = coord
-                            } else {
-                                numberOfAttempts += 1
-                                if numberOfAttempts == coordinates.count-1 {
-                                    pointWithLowestTangens = westPoint
-                                }
+                        // NW
+                        if checkDirection(from: lastAddedPoint, to: coord, direction: .NW), let newLowestTangens = returnTangensIfLowest(from: lastAddedPoint, coord: coord, direction: .NW) {
+                            lowestTangens = newLowestTangens
+                            pointWithLowestTangens = coord
+                        } else {
+                            numberOfAttempts += 1
+                            if numberOfAttempts == coordinates.count {
+                                pointWithLowestTangens = westPoint
                             }
                         }
                     }
                     polygonCoordinates.append(pointWithLowestTangens)
                     lastAddedPoint = pointWithLowestTangens
-                    lowestTangens = 99999
+                    lowestTangens = Double.infinity
                 }
             }
-            
-            if !polygonCoordinates.isEmpty {
-                print("Created a polygon \(polygonCoordinates.count) points")
+        
+            if polygonCoordinates.count > 2 {
+                print("Created a polygon from \(polygonCoordinates.count) points, \(coordinates.count - polygonCoordinates.count) points left hopefully inside")
                 let polygon = MKPolygon.init(coordinates: &polygonCoordinates, count: polygonCoordinates.count)
                 return polygon
+            } else {
+                print("Can't create polygon")
             }
         }
         return nil
+    }
+    
+    func findWestAndEastMostPoint(coordinates: [CLLocationCoordinate2D]) -> (westPoint: CLLocationCoordinate2D, eastPoint: CLLocationCoordinate2D) {
+        var westPoint = CLLocationCoordinate2DMake(CLLocationDegrees(-90), CLLocationDegrees(180))
+        var eastPoint = CLLocationCoordinate2DMake(CLLocationDegrees(-90), CLLocationDegrees(-180))
+        
+        // Get westmost and eastmost points
+        for coordinate in coordinates {
+            if coordinate.longitude < westPoint.longitude {
+                westPoint = coordinate
+            } else if coordinate.longitude == westPoint.longitude {
+                if coordinate.latitude > westPoint.latitude {
+                    westPoint = coordinate
+                }
+            }
+            if coordinate.longitude > eastPoint.longitude {
+                eastPoint = coordinate
+            } else if coordinate.longitude == eastPoint.longitude {
+                if coordinate.latitude < eastPoint.latitude {
+                    eastPoint = coordinate
+                }
+            }
+        }
+        return (westPoint, eastPoint)
+    }
+    
+    func checkDirection(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D, direction: Direction) -> Bool {
+        switch direction {
+        case .NE:
+            if to.longitude > from.longitude && to.latitude >= from.latitude {
+                return true } else { return false }
+        case .SE:
+            if from.latitude > to.latitude && to.longitude >= from.longitude {
+                return true } else { return false }
+        case .SW:
+            if to.latitude <= from.latitude && to.longitude < from.longitude {
+                return true } else { return false }
+        case .NW:
+            if to.latitude > from.latitude && to.longitude <= from.longitude {
+                return true } else { return false }
+        }
+    }
+    
+    func returnTangensIfLowest(from: CLLocationCoordinate2D, coord: CLLocationCoordinate2D, direction: Direction) -> Double? {
+        var tangens: Double
+        switch direction {
+        case .NE: // fmin(dx/dy)
+            tangens = (coord.longitude - from.longitude)/(coord.latitude - from.latitude)
+        case .SE: // fmin(dy/dx)
+            tangens = (from.latitude - coord.latitude)/(coord.longitude - from.longitude)
+        case .SW: // fmin(dx/dy)
+            tangens = (from.longitude - coord.longitude)/(from.latitude - coord.latitude)
+        case .NW: // fmin(dy/dx)
+            tangens = (coord.latitude - from.latitude)/(from.longitude - coord.longitude)
+        }
+        if tangens < lowestTangens {
+            return tangens
+        } else if tangens == Double.infinity && lowestTangens == Double.infinity {
+            // if it's in one line (dx == 0 || dy == 0) and haven't found any better way
+            return tangens
+        } else { return nil }
     }
 }
