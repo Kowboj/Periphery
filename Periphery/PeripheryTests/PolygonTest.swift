@@ -14,11 +14,12 @@ final class PolygonTest: XCTestCase {
 
     var sut: PolygonCreator!
     var coordinates = [CLLocationCoordinate2D]()
+    var numberOfRandomCoordinates = 50
     
     override func setUp() {
         super.setUp()
         sut = PolygonCreator()
-        for _ in 0...7 {
+        for _ in 0...numberOfRandomCoordinates {
             let randomLat = CLLocationDegrees.init(exactly: Float.random(in: 50...51))
             let randomLon = CLLocationDegrees.init(exactly: Float.random(in: 21...22))
             coordinates.append(CLLocationCoordinate2D(latitude: randomLat!, longitude: randomLon!))
@@ -26,10 +27,15 @@ final class PolygonTest: XCTestCase {
     }
     
     func testOutputCoordinatesCount() {
-        let polygon = sut.createPolygon(coordinates: coordinates)
-//        for coord in coordinates {
-//            print(coord.latitude, coord.longitude)
-//        }
-        XCTAssertEqual(polygon!.pointCount, coordinates.count)
+        if let polygon = sut.createPolygon(coordinates: coordinates) {
+            var outsidePoints = 0
+            for coord in coordinates {
+                if !polygon.boundingMapRect.contains(MKMapPoint(coord)) {
+                    outsidePoints += 1
+                }
+            }
+            XCTAssertEqual(outsidePoints, 0)
+        }
+        
     }
 }

@@ -37,6 +37,22 @@ final class CoordinatesViewController: UIViewController {
         }
     }
     
+    @objc func generateRandomClick() {
+        guard let randomNumberText = coordinatesView.randomNumberTextField.text else { return }
+        let numberOfRandom = NSString(string: randomNumberText).intValue
+        for _ in 0..<numberOfRandom {
+            let randomLat = CLLocationDegrees.init(exactly: Float.random(in: 50...51))
+            let randomLon = CLLocationDegrees.init(exactly: Float.random(in: 21...22))
+            coordinates.append(CLLocationCoordinate2D(latitude: randomLat!, longitude: randomLon!))
+        }
+        coordinatesView.tableView.reloadData()
+    }
+    
+    @objc func clearClick() {
+        coordinates.removeAll()
+        coordinatesView.tableView.reloadData()
+    }
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -84,6 +100,12 @@ final class CoordinatesViewController: UIViewController {
         // Add show map action
         coordinatesView.showMapButton.addTarget(self, action: #selector(showMapClick), for: UIControl.Event.touchUpInside)
         
+        // Add generate random action
+        coordinatesView.randomButton.addTarget(self, action: #selector(generateRandomClick), for: UIControl.Event.touchUpInside)
+        
+        // Add clear action
+        coordinatesView.clearButton.addTarget(self, action: #selector(clearClick), for: UIControl.Event.touchUpInside)
+        
         // Add keyboard hiding action
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         coordinatesView.addGestureRecognizer(tap)
@@ -115,5 +137,4 @@ extension CoordinatesViewController: UITableViewDelegate, UITableViewDataSource 
         coordinates.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
     }
-    
 }

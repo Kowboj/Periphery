@@ -23,7 +23,7 @@ final class CoordinatesView: UIView {
         textField.keyboardType = UIKeyboardType.decimalPad
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.backgroundColor = .white
-        textField.placeholder = "latitude"
+        textField.attributedPlaceholder = NSAttributedString(string: "latitude", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         textField.font = UIFont(name: "AmericanTypewriter", size: 12)
         textField.textAlignment = .center
         textField.layer.cornerRadius = 5
@@ -35,7 +35,7 @@ final class CoordinatesView: UIView {
         textField.keyboardType = UIKeyboardType.decimalPad
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.backgroundColor = .white
-        textField.placeholder = "longitude"
+        textField.attributedPlaceholder = NSAttributedString(string: "longitude", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         textField.font = UIFont(name: "AmericanTypewriter", size: 12)
         textField.textAlignment = .center
         textField.layer.cornerRadius = 5
@@ -85,6 +85,43 @@ final class CoordinatesView: UIView {
         return button
     }()
     
+    private(set) lazy var randomButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Generate random", for: UIControl.State.normal)
+        button.titleLabel?.font = UIFont(name: "AmericanTypewriter", size: 12)
+        button.setTitleColor(.white, for: UIControl.State.normal)
+        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 5
+        return button
+    }()
+    
+    private(set) lazy var randomNumberTextField: UITextField = {
+        let textField = UITextField()
+        textField.keyboardType = UIKeyboardType.numberPad
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.backgroundColor = .white
+        textField.attributedPlaceholder = NSAttributedString(string: "# of random", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        textField.font = UIFont(name: "AmericanTypewriter", size: 12)
+        textField.textAlignment = .center
+        textField.layer.cornerRadius = 5
+        return textField
+    }()
+    
+    private(set) lazy var clearButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Clear", for: UIControl.State.normal)
+        button.titleLabel?.font = UIFont(name: "AmericanTypewriter", size: 12)
+        button.setTitleColor(.white, for: UIControl.State.normal)
+        button.layer.borderColor = UIColor.red.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 5
+        button.backgroundColor = UIColor.init(displayP3Red: 0.7, green: 0, blue: 0, alpha: 0.5)
+        return button
+    }()
+    
     init() {
         super.init(frame: .zero)
         setupViewHierarchy()
@@ -97,7 +134,7 @@ final class CoordinatesView: UIView {
     }
     
     fileprivate func setupViewHierarchy() {
-        [latTextField, lonTextField, latSegmented, lonSegmented, infoLabel, addButton, tableView, showMapButton].forEach(addSubview)
+        [latTextField, lonTextField, latSegmented, lonSegmented, infoLabel, addButton, tableView, showMapButton, randomButton, randomNumberTextField, clearButton].forEach(addSubview)
     }
     
     fileprivate func setupProperties() {
@@ -145,7 +182,22 @@ final class CoordinatesView: UIView {
             showMapButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20),
             showMapButton.heightAnchor.constraint(equalToConstant: 30),
             showMapButton.widthAnchor.constraint(equalToConstant: 120),
-            showMapButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
+            
+            randomButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            randomButton.topAnchor.constraint(equalTo: showMapButton.bottomAnchor, constant: 40),
+            randomButton.heightAnchor.constraint(equalToConstant: 30),
+            randomButton.widthAnchor.constraint(equalToConstant: 120),
+            randomButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40),
+            
+            randomNumberTextField.trailingAnchor.constraint(equalTo: randomButton.leadingAnchor, constant: -20),
+            randomNumberTextField.centerYAnchor.constraint(equalTo: randomButton.centerYAnchor),
+            randomNumberTextField.heightAnchor.constraint(equalToConstant: 30),
+            randomNumberTextField.widthAnchor.constraint(equalToConstant: 80),
+            
+            clearButton.leadingAnchor.constraint(equalTo: randomButton.trailingAnchor, constant: 20),
+            clearButton.centerYAnchor.constraint(equalTo: randomButton.centerYAnchor),
+            clearButton.heightAnchor.constraint(equalToConstant: 30),
+            clearButton.widthAnchor.constraint(equalToConstant: 80)
             ])
     }
 }
