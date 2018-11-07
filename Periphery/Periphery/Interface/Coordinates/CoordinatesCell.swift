@@ -48,22 +48,11 @@ class CoordinatesCell: UITableViewCell {
     }
     
     func setupLayoutConstraints() {
-        NSLayoutConstraint.activate([
-            numberLabel.topAnchor.constraint(equalTo: topAnchor),
-            numberLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
-            numberLabel.widthAnchor.constraint(equalToConstant: 20),
-            numberLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            
-            latLabel.topAnchor.constraint(equalTo: topAnchor),
-            latLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
-            latLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -25),
-            latLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5),
-            
-            lonLabel.topAnchor.constraint(equalTo: latLabel.bottomAnchor),
-            lonLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
-            lonLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -25),
-            lonLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            ])
+        numberLabel.anchor(top: topAnchor, leading: nil, trailing: trailingAnchor, bottom: bottomAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -5), size: CGSize(width: 20, height: 0))
+        
+        latLabel.anchor(top: topAnchor, leading: leadingAnchor, trailing: trailingAnchor, bottom: nil, padding: UIEdgeInsets(top: 0, left: 25, bottom: 0, right: -25), size: CGSize(width: 0, height: 0.5 * frame.height))
+        
+        lonLabel.anchor(top: latLabel.bottomAnchor, leading: leadingAnchor, trailing: trailingAnchor, bottom: bottomAnchor, padding: UIEdgeInsets(top: 0, left: 25, bottom: 0, right: -25), size: .zero)
     }
 }
 

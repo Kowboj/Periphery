@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F43FF5292179D59200D46EC4 /* MapKit.CLLocationCoordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43FF5282179D59200D46EC4 /* MapKit.CLLocationCoordinate2D.swift */; };
+		F4B8298E219314F600359A14 /* UIKit.UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B8298D219314F600359A14 /* UIKit.UIView.swift */; };
 		F4F6CBA621707D5B008A0A14 /* PolygonTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F6CBA521707D5B008A0A14 /* PolygonTest.swift */; };
 		F4FC5F9A216F58C200BD710D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FC5F99216F58C200BD710D /* AppDelegate.swift */; };
 		F4FC5FA1216F58C400BD710D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4FC5FA0216F58C400BD710D /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		F43FF5282179D59200D46EC4 /* MapKit.CLLocationCoordinate2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKit.CLLocationCoordinate2D.swift; sourceTree = "<group>"; };
+		F4B8298D219314F600359A14 /* UIKit.UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.UIView.swift; sourceTree = "<group>"; };
 		F4F6CBA321707D5B008A0A14 /* PeripheryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeripheryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F6CBA521707D5B008A0A14 /* PolygonTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonTest.swift; sourceTree = "<group>"; };
 		F4F6CBA721707D5B008A0A14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				F43FF5282179D59200D46EC4 /* MapKit.CLLocationCoordinate2D.swift */,
+				F4B8298D219314F600359A14 /* UIKit.UIView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				F4FC5FBC216F8CA900BD710D /* MapView.swift in Sources */,
 				F4FC5FB1216F677600BD710D /* CoordinatesView.swift in Sources */,
 				F4FC5FC1216F9B6800BD710D /* PolygonCreator.swift in Sources */,
+				F4B8298E219314F600359A14 /* UIKit.UIView.swift in Sources */,
 				F4FC5FBA216F8C8C00BD710D /* MapViewController.swift in Sources */,
 				F4FC5FB3216F677E00BD710D /* CoordinatesViewController.swift in Sources */,
 				F4FC5F9A216F58C200BD710D /* AppDelegate.swift in Sources */,
