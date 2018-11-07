@@ -1,11 +1,3 @@
-//
-//  UIKit.UIView.swift
-//  Periphery
-//
-//  Created by NoGravity DEV on 07/11/2018.
-//  Copyright © 2018 Kowboj. All rights reserved.
-//
-
 import UIKit
 
 extension UIView {
